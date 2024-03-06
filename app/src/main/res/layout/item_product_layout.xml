@@ -16,7 +16,7 @@
         android:padding="8dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivFilmImage"
+            android:id="@+id/ivProductThumbnail"
             android:layout_width="40dp"
             android:layout_height="63dp"
             android:scaleType="centerCrop"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvFilmTitle"
+            android:id="@+id/tvProductTitle"
             android:ellipsize="end"
             android:maxLines="1"
             android:layout_width="0dp"
@@ -35,15 +35,15 @@
             android:textStyle="bold"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvFilmGenre"
+            app:layout_constraintBottom_toTopOf="@+id/tvProductDescription"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivFilmImage"
+            app:layout_constraintStart_toEndOf="@+id/ivProductThumbnail"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
             tools:text="iPhone 9" />
 
         <TextView
-            android:id="@+id/tvFilmGenre"
+            android:id="@+id/tvProductDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -54,8 +54,8 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivFilmImage"
-            app:layout_constraintTop_toBottomOf="@+id/tvFilmTitle"
+            app:layout_constraintStart_toEndOf="@+id/ivProductThumbnail"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductTitle"
             app:layout_constraintVertical_bias="0.5"
             tools:text="An apple mobile which is nothing like apple" />
 
