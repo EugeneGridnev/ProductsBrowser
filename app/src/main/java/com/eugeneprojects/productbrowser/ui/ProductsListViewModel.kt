@@ -1,4 +1,4 @@
-package com.eugeneprojects.productbrowser
+package com.eugeneprojects.productbrowser.ui
 
 import androidx.lifecycle.ViewModel
 

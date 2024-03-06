@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eugeneprojects.productbrowser.databinding.ItemProductLayoutBinding
+
 import com.eugeneprojects.productbrowser.models.Product
 
 class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
