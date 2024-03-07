@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.databinding.ItemProductLayoutBinding
 
 import com.eugeneprojects.productbrowser.models.Product
@@ -44,7 +45,10 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>(
 
         holder.itemView.apply {
             val product = differ.currentList[position]
-            Glide.with(this).load(product.thumbnail).into(holder.binding.ivProductThumbnail)
+            Glide.with(this)
+                .load(product.thumbnail)
+                .placeholder(R.drawable.ic_image_placeholder)
+                .into(holder.binding.ivProductThumbnail)
             holder.binding.tvProductTitle.text = product.title
             holder.binding.tvProductDescription.text = product.description
         }

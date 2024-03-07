@@ -1,7 +1,9 @@
 package com.eugeneprojects.productbrowser.ui
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.eugeneprojects.productbrowser.repository.ProductsRepository
 
-class ProductsListViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class ProductsListViewModel(app: Application, val productsRepository: ProductsRepository) : AndroidViewModel(app) {
+
 }
