@@ -1,39 +1,46 @@
 package com.eugeneprojects.productbrowser.ui
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eugeneprojects.productbrowser.models.ProductsResponse
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.eugeneprojects.productbrowser.models.Product
 import com.eugeneprojects.productbrowser.repository.ProductsRepository
-import com.eugeneprojects.productbrowser.util.Resource
-import kotlinx.coroutines.launch
-import retrofit2.Response
+import com.eugeneprojects.productbrowser.repository.paging.ProductPagingSource
+import com.eugeneprojects.productbrowser.util.Constants
+import kotlinx.coroutines.flow.Flow
 
-class ProductsListViewModel(app: Application, val productsRepository: ProductsRepository) :
-    AndroidViewModel(app) {
+class ProductsListViewModel(private val productsRepository: ProductsRepository) :
+    ViewModel() {
 
-    private val _products = MutableLiveData<Resource<ProductsResponse>>()
-    val products: LiveData<Resource<ProductsResponse>> = _products
+//    private val _products = MutableLiveData<Result<ProductsResponse>>()
+//    val products: LiveData<Result<ProductsResponse>> = _products
 
-    init {
-        getProducts()
+//    init {
+//        getProducts()
+//    }
+
+    fun getProducts(): Flow<PagingData<Product>> {
+        return Pager(
+            config = PagingConfig(
+                Constants.PAGE_SIZE,
+                enablePlaceholders = false,
+                initialLoadSize = Constants.PAGE_SIZE
+            ),
+            pagingSourceFactory = { ProductPagingSource(productsRepository) }
+        ).flow
+            .cachedIn(viewModelScope)
     }
 
-    fun getProducts() = viewModelScope.launch {
-        _products.postValue(Resource.Loading())
-        val response = productsRepository.getProducts()
-        _products.postValue(handleProductsResponse(response))
-    }
-
-    private fun handleProductsResponse(response: Response<ProductsResponse>) : Resource<ProductsResponse> {
-        if(response.isSuccessful) {
-            response.body()?.let { resultResponse ->
-                return Resource.Success(resultResponse)
-            }
-        }
-        return Resource.Error(response.message())
-    }
+//    private fun handleProductsResponse(response: Response<ProductsResponse>) : Result<ProductsResponse> {
+//        if(response.isSuccessful) {
+//            response.body()?.let { resultResponse ->
+//                return Result.Success(resultResponse)
+//            }
+//        }
+//        return Result.Error(response.message())
+//    }
 
 }

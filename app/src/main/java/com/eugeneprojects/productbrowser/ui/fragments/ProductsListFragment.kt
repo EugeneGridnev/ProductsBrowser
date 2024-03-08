@@ -5,63 +5,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eugeneprojects.productbrowser.adapters.ProductsAdapter
+import com.eugeneprojects.productbrowser.adapters.ProductsPagingAdapter
 import com.eugeneprojects.productbrowser.databinding.FragmentProductsListBinding
-import com.eugeneprojects.productbrowser.ui.ProductsActivity
+import com.eugeneprojects.productbrowser.repository.ProductsRepository
 import com.eugeneprojects.productbrowser.ui.ProductsListViewModel
-import com.eugeneprojects.productbrowser.util.Resource
+import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ProductsListFragment : Fragment() {
 
-    lateinit var binding: FragmentProductsListBinding
-    lateinit var productsAdapter: ProductsAdapter
+    private var binding: FragmentProductsListBinding? = null
+    private lateinit var productsPagingAdapter: ProductsPagingAdapter
     private lateinit var viewModel: ProductsListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProductsListBinding.inflate(inflater)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as ProductsActivity).viewModel
+        val productsRepository = ProductsRepository()
+        val viewModelProviderFactory = ProductsViewModelProviderFactory(productsRepository)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory)[ProductsListViewModel::class.java]
+        productsPagingAdapter = ProductsPagingAdapter()
         setUpRecyclerView()
 
-        viewModel.products.observe(viewLifecycleOwner, Observer { response ->
-            when(response) {
-                is Resource.Success -> {
-                    hideProgressBar()
-                    response.data?.let { productsResponse ->
-                        productsAdapter.differ.submitList(productsResponse.products)
-                    }
-                }
-                is Resource.Error -> {
-                    hideProgressBar()
-                }
-                is Resource.Loading -> {
-                    showProgressBar()
-                }
+        observeProducts(productsPagingAdapter)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+    private fun observeProducts(adapter: ProductsPagingAdapter) {
+        lifecycleScope.launch {
+            viewModel.getProducts().collectLatest { pagingData ->
+                adapter.submitData(pagingData)
             }
-        })
+        }
     }
 
-    private fun hideProgressBar() {
-        binding.paginationProgressBar.visibility = View.INVISIBLE
-    }
-
-    private fun showProgressBar() {
-        binding.paginationProgressBar.visibility = View.VISIBLE
-    }
+//    private fun hideProgressBar() {
+//        binding.paginationProgressBar.visibility = View.INVISIBLE
+//    }
+//
+//    private fun showProgressBar() {
+//        binding.paginationProgressBar.visibility = View.VISIBLE
+//    }
 
     private fun setUpRecyclerView() {
-        productsAdapter = ProductsAdapter()
-        binding.rvProducts.apply {
-            adapter = productsAdapter
+        productsPagingAdapter = ProductsPagingAdapter()
+        binding?.rvProducts?.apply {
+            adapter = productsPagingAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }
