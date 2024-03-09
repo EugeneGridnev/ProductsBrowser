@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.eugeneprojects.productbrowser.models.Product
 import com.eugeneprojects.productbrowser.repository.ProductsRepository
 import com.eugeneprojects.productbrowser.repository.paging.ProductPagingSource
@@ -24,6 +25,6 @@ class ProductsListViewModel(private val productsRepository: ProductsRepository) 
             ),
             pagingSourceFactory = { ProductPagingSource(productsRepository) }
         ).flow
+            .cachedIn(viewModelScope)
             .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
-
 }

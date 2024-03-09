@@ -38,9 +38,9 @@ class ProductsPagingAdapter :
                     Glide.with(this)
                         .load(product.thumbnail)
                         .placeholder(R.drawable.ic_image_placeholder)
-                        .into(binding.ivProductThumbnail)
-                    binding.tvProductTitle.text = product.title
-                    binding.tvProductDescription.text = product.description
+                        .into(binding.itemViewProductThumbnail)
+                    binding.textViewProductTitle.text = product.title
+                    binding.textViewProductDescription.text = product.description
                 }
             }
         }

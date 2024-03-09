@@ -9,5 +9,13 @@
         android:id="@+id/productsListFragment"
         android:name="com.eugeneprojects.productbrowser.ui.fragments.ProductsListFragment"
         android:label="fragment_products_list"
-        tools:layout="@layout/fragment_products_list" />
+        tools:layout="@layout/fragment_products_list" >
+        <action
+            android:id="@+id/action_productsListFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.eugeneprojects.productbrowser.ui.fragments.ProductFragment"
+        android:label="ProductFragment" />
 </navigation>
