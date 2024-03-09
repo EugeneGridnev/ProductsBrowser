@@ -3,4 +3,7 @@
     <string name="product_brand">Бренд:</string>
     <string name="product_price">Цена:</string>
     <string name="product_category">Категория:</string>
+    <string name="try_again">Попоробовать снова</string>
+    <string name="load_error">Ошибка загрузки</string>
+    <string name="search_text">Введите название:</string>
 </resources>
