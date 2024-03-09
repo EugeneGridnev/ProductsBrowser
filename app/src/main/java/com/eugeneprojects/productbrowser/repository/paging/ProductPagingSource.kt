@@ -18,9 +18,9 @@ class ProductPagingSource (
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
 
-        val skip = 0
         val pageNumber = params.key ?: INITIAL_PAGE_NUMBER
         val pageSize: Int = params.loadSize.coerceAtMost(Constants.PAGE_SIZE)
+        val skip = pageNumber * pageSize
         val response = productsRepository.getProducts(pageSize, skip)
 
         if (response.isSuccessful) {
@@ -38,8 +38,8 @@ class ProductPagingSource (
                     product.title)
             }
 
-            val nextPageNumber = if (products.size <= (response.body()?.limit ?: pageSize)) null else pageNumber + 1
-            val prevPageNumber = if (pageNumber == 1) null else pageNumber + 1
+            val nextPageNumber = if (skip + products.size >= (response.body()?.total ?: pageSize)) null else pageNumber + 1
+            val prevPageNumber = if (pageNumber == 0) null else pageNumber - 1
 
             return LoadResult.Page(products, prevPageNumber, nextPageNumber)
         } else {
@@ -48,6 +48,6 @@ class ProductPagingSource (
     }
 
     companion object {
-        const val INITIAL_PAGE_NUMBER = 1
+        const val INITIAL_PAGE_NUMBER = 0
     }
 }

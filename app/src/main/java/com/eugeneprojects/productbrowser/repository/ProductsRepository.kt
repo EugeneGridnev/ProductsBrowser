@@ -1,7 +1,8 @@
 package com.eugeneprojects.productbrowser.repository
 
-import com.eugeneprojects.productbrowser.api.RetrofitInstance
+import com.eugeneprojects.productbrowser.models.ProductsResponse
+import retrofit2.Response
 
-class ProductsRepository {
-    suspend fun getProducts(productsLimit: Int, skip: Int) = RetrofitInstance.api.getProducts(productsLimit, skip)
+interface ProductsRepository {
+    suspend fun getProducts(productsLimit: Int, skip: Int): Response<ProductsResponse>
 }
