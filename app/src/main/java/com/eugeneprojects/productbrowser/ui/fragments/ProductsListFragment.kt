@@ -11,13 +11,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.adapters.ProductsLoadStateAdapter
 import com.eugeneprojects.productbrowser.adapters.ProductsPagingAdapter
 import com.eugeneprojects.productbrowser.databinding.FragmentProductsListBinding
 import com.eugeneprojects.productbrowser.repository.ProductsRepositoryIMPL
-import com.eugeneprojects.productbrowser.ui.ProductsListViewModel
+import com.eugeneprojects.productbrowser.ui.ProductsViewModel
 import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
 import com.eugeneprojects.productbrowser.util.Constants
 import kotlinx.coroutines.flow.collectLatest
@@ -26,7 +28,7 @@ import kotlinx.coroutines.launch
 class ProductsListFragment : Fragment() {
 
     private var binding: FragmentProductsListBinding? = null
-    private lateinit var viewModel: ProductsListViewModel
+    private lateinit var viewModel: ProductsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +45,7 @@ class ProductsListFragment : Fragment() {
         val viewModelProviderFactory = ProductsViewModelProviderFactory(productsRepository)
 
         viewModel =
-            ViewModelProvider(this, viewModelProviderFactory)[ProductsListViewModel::class.java]
+            ViewModelProvider(this, viewModelProviderFactory)[ProductsViewModel::class.java]
 
         setUpProductsList()
     }
@@ -57,10 +59,8 @@ class ProductsListFragment : Fragment() {
 
         val productsPagingAdapter = ProductsPagingAdapter()
 
-        productsPagingAdapter.withLoadStateFooter(ProductsLoadStateAdapter())
-
         binding?.recyclerViewProducts?.layoutManager = LinearLayoutManager(activity)
-        binding?.recyclerViewProducts?.adapter = productsPagingAdapter
+        binding?.recyclerViewProducts?.adapter = productsPagingAdapter.withLoadStateFooter(ProductsLoadStateAdapter())
 
         productsPagingAdapter.addLoadStateListener { combinedLoadStates ->
             val refreshState = combinedLoadStates.refresh
@@ -72,13 +72,29 @@ class ProductsListFragment : Fragment() {
         }
 
         observeProducts(productsPagingAdapter)
+
+        setOnProductClick(productsPagingAdapter)
     }
 
     private fun observeProducts(adapter: ProductsPagingAdapter) {
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.products.collectLatest(adapter::submitData)
             }
+        }
+    }
+
+    private fun setOnProductClick(adapter: ProductsPagingAdapter) {
+
+        adapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("product", it)
+            }
+            findNavController().navigate(
+                R.id.action_productsListFragment_to_productFragment,
+                bundle
+            )
         }
     }
 }

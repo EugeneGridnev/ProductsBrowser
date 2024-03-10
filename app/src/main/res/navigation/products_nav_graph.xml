@@ -17,5 +17,9 @@
     <fragment
         android:id="@+id/productFragment"
         android:name="com.eugeneprojects.productbrowser.ui.fragments.ProductFragment"
-        android:label="ProductFragment" />
+        android:label="ProductFragment" >
+        <argument
+            android:name="product"
+            app:argType="com.eugeneprojects.productbrowser.models.Product" />
+    </fragment>
 </navigation>

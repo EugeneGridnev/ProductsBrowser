@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
-class ProductsListViewModel(private val productsRepository: ProductsRepository) :
+class ProductsViewModel(private val productsRepository: ProductsRepository) :
     ViewModel() {
 
         val products: StateFlow<PagingData<Product>> = Pager(

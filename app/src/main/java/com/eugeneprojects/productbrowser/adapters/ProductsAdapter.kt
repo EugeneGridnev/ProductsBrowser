@@ -14,6 +14,8 @@ import com.eugeneprojects.productbrowser.models.Product
 class ProductsPagingAdapter :
     PagingDataAdapter<Product, ProductsPagingAdapter.ProductViewHolder>(ProductDiffCallBack()) {
 
+    private var onItemClickListener: ((Product) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
             ItemProductLayoutBinding.inflate(
@@ -27,6 +29,9 @@ class ProductsPagingAdapter :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position) ?: return
         holder.bind(product)
+        setOnItemClickListener {
+            onItemClickListener?.let { it(product) }
+        }
     }
 
 
@@ -53,5 +58,9 @@ class ProductsPagingAdapter :
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
+    }
+
+    fun setOnItemClickListener(listener: (Product) -> Unit) {
+        onItemClickListener = listener
     }
 }
