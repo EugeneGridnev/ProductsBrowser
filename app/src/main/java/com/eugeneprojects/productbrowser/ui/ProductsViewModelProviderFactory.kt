@@ -2,12 +2,14 @@ package com.eugeneprojects.productbrowser.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.eugeneprojects.productbrowser.network.ConnectivityRepository
 import com.eugeneprojects.productbrowser.repository.ProductsRepository
 
 class ProductsViewModelProviderFactory(
-    val productsRepository: ProductsRepository
+    private val productsRepository: ProductsRepository,
+    private val connectivityRepository: ConnectivityRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return ProductsViewModel(productsRepository) as T
+        return ProductsViewModel(productsRepository, connectivityRepository) as T
     }
 }

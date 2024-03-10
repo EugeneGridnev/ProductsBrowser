@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.databinding.FragmentProductBinding
+import com.eugeneprojects.productbrowser.network.ConnectivityRepository
 import com.eugeneprojects.productbrowser.repository.ProductsRepositoryIMPL
 import com.eugeneprojects.productbrowser.ui.ProductsActivity
 import com.eugeneprojects.productbrowser.ui.ProductsViewModel
@@ -17,9 +18,9 @@ import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
 
 class ProductFragment : Fragment() {
 
-    lateinit var binding: FragmentProductBinding
-    lateinit var viewModel: ProductsViewModel
-    val args: ProductFragmentArgs by navArgs()
+    private lateinit var binding: FragmentProductBinding
+    private lateinit var viewModel: ProductsViewModel
+    private val args: ProductFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +34,8 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val productsRepository = ProductsRepositoryIMPL()
-        val viewModelProviderFactory = ProductsViewModelProviderFactory(productsRepository)
+        val connectivityRepository = ConnectivityRepository(requireContext())
+        val viewModelProviderFactory = ProductsViewModelProviderFactory(productsRepository, connectivityRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[ProductsViewModel::class.java]
         setUpProductUI()
     }

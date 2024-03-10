@@ -18,6 +18,7 @@ import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.adapters.ProductsLoadStateAdapter
 import com.eugeneprojects.productbrowser.adapters.ProductsPagingAdapter
 import com.eugeneprojects.productbrowser.databinding.FragmentProductsListBinding
+import com.eugeneprojects.productbrowser.network.ConnectivityRepository
 import com.eugeneprojects.productbrowser.repository.ProductsRepositoryIMPL
 import com.eugeneprojects.productbrowser.ui.ProductsViewModel
 import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
@@ -42,12 +43,19 @@ class ProductsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val productsRepository = ProductsRepositoryIMPL()
-        val viewModelProviderFactory = ProductsViewModelProviderFactory(productsRepository)
+        val connectivityRepository =ConnectivityRepository(requireContext())
+        val viewModelProviderFactory = ProductsViewModelProviderFactory(productsRepository, connectivityRepository)
 
         viewModel =
             ViewModelProvider(this, viewModelProviderFactory)[ProductsViewModel::class.java]
 
-        setUpProductsList()
+        viewModel.isOnline.observe(viewLifecycleOwner) { isOnline ->
+            if (isOnline) {
+                setUpProductsList()
+            } else {
+                Toast.makeText(activity, Constants.NETWORK_ERROR, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
