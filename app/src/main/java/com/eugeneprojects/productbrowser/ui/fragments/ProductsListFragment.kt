@@ -65,8 +65,8 @@ class ProductsListFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         binding = null
+        super.onDestroyView()
     }
 
     private fun setUpProductsList() {

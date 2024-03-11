@@ -11,14 +11,12 @@ import com.eugeneprojects.productbrowser.network.ConnectivityRepository
 import com.eugeneprojects.productbrowser.repository.ProductsRepository
 import com.eugeneprojects.productbrowser.repository.paging.ProductPagingSource
 import com.eugeneprojects.productbrowser.util.Constants
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 
 class ProductsViewModel(
     private val productsRepository: ProductsRepository,
-    connectivityRepository: ConnectivityRepository
+    private val connectivityRepository: ConnectivityRepository
 ) :
     ViewModel() {
 
@@ -26,7 +24,7 @@ class ProductsViewModel(
 
     val isOnline = connectivityRepository.isConnected.asLiveData()
 
-    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+
     val products = searchQuery
         .asFlow()
         .debounce(500)
