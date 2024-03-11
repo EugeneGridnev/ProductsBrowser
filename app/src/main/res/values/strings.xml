@@ -5,8 +5,11 @@
     <string name="product_category">Категория:</string>
     <string name="try_again">Попоробовать снова</string>
     <string name="load_error">Ошибка загрузки</string>
-    <string name="search_text">Введите название:</string>
+    <string name="search_text">Поиск:</string>
     <string name="network_error_message">Нет подключения к сети</string>
     <string name="toast_load_error_message">Ошибка загрузки</string>
+    <string name="product_rating">Рейтинг:</string>
+    <string name="product_stock">Штук в наличии:</string>
+    <string name="product_discount_percentage">Скидка:</string>
 
 </resources>

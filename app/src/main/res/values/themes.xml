@@ -16,7 +16,7 @@
         <item name="android:layout_marginTop">@dimen/product_fragment_main_text_margin_top</item>
         <item name="android:layout_marginBottom">@dimen/product_fragment_main_text_margin_bottom</item>
         <item name="android:layout_marginStart">@dimen/product_fragment_main_text_margin_start</item>
-        <item name="android:layout_marginEnd">@dimen/product_fragment_main_text_margin_bottom</item>
+        <item name="android:layout_marginEnd">@dimen/product_fragment_main_text_margin_end</item>
     </style>
 
     <style name="productFragmentText" parent="productFragmentMainText">

@@ -1,5 +1,6 @@
 package com.eugeneprojects.productbrowser.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,6 +40,7 @@ class ProductFragment : Fragment() {
         setUpProductUI()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setUpProductUI() {
 
         val product = args.product
@@ -50,7 +52,10 @@ class ProductFragment : Fragment() {
         binding.textViewProductTitle.text = product.title
         binding.textViewProductDescription.text = product.description
         binding.textViewProductBrand.text = product.brand
-        binding.textViewProductPrice.text = product.price.toString()
+        binding.textViewProductPrice.text = product.price.toString() + "$"
+        binding.textViewProductDiscountPercentage.text = product.discountPercentage.toString() + "%"
         binding.textViewProductCategory.text = product.category
+        binding.textViewProductRating.text = product.rating.toString()
+        binding.textViewProductStock.text = product.stock.toString()
     }
 }

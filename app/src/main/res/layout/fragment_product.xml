@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewProductImage"
             android:layout_width="match_parent"
             android:layout_height="@dimen/product_image_view_height"
@@ -84,7 +84,7 @@
             android:textAppearance="?attr/textAppearanceTitleSmall"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintBottom_toTopOf="@+id/textViewProductCategoryTitle"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductDiscountPercentageTitle"
             app:layout_constraintEnd_toStartOf="@+id/textViewProductPrice"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewProductBrand" />
@@ -104,6 +104,34 @@
             app:layout_constraintTop_toTopOf="@+id/textViewProductPriceTitle"
             tools:text="300$" />
 
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductDiscountPercentageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/product_discount_percentage"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductCategoryTitle"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductDiscountPercentage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductPrice" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductDiscountPercentage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductDiscountPercentageTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductDiscountPercentageTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductDiscountPercentageTitle"
+            tools:text="20%" />
 
         <TextView
             style="@style/productFragmentTitles"
@@ -115,10 +143,10 @@
             android:textAppearance="?attr/textAppearanceTitleSmall"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductRatingTitle"
             app:layout_constraintEnd_toStartOf="@+id/textViewProductCategory"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewProductPrice" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductDiscountPercentage" />
 
         <TextView
             style="@style/productFragmentText"
@@ -133,6 +161,64 @@
             app:layout_constraintTop_toTopOf="@+id/textViewProductCategoryTitle"
             app:layout_constraintBottom_toBottomOf="@+id/textViewProductCategoryTitle"
             tools:text="Техника" />
+
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductRatingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/product_rating"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductStockTitle"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductRating"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductCategory" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductRating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductRatingTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductRatingTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductRatingTitle"
+            tools:text="10" />
+
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductStockTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/product_stock"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductStock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductRating" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductStock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductStockTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductStockTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductStockTitle"
+            tools:text="100" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

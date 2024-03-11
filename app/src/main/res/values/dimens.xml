@@ -4,7 +4,7 @@
 
     <dimen name="base_margin_for_products_list_views">8dp</dimen>
 
-    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
     <dimen name="card_margin">4dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
     <dimen name="card_padding">10dp</dimen>
