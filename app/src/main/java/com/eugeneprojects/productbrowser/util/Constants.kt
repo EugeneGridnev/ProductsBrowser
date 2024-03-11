@@ -13,4 +13,5 @@ object Constants {
         prefetchDistance = PREFETCH_DISTANCE,
         enablePlaceholders = false
     )
+    const val LIST_LOAD_ERROR = "При загрузке списка возникла ошибка, проверьте сеть и попробуйте обновить список"
 }
