@@ -24,7 +24,10 @@ import com.eugeneprojects.productbrowser.network.ConnectivityRepositoryIMPL
 import com.eugeneprojects.productbrowser.repository.ProductsRepositoryIMPL
 import com.eugeneprojects.productbrowser.ui.ProductsViewModel
 import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
+import com.eugeneprojects.productbrowser.util.simpleScan
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class ProductsListFragment : Fragment() {
@@ -55,6 +58,7 @@ class ProductsListFragment : Fragment() {
         setUpProductsList()
         observeProducts()
         setTextChangeListener()
+        handleScrollingToTopWhenSearching(productsPagingAdapter)
 
         viewModel.isOnline.observe(viewLifecycleOwner) { isOnline ->
             if (isOnline) {
@@ -140,4 +144,22 @@ class ProductsListFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) { }
         })
     }
+
+    private fun handleScrollingToTopWhenSearching(adapter: ProductsPagingAdapter) = lifecycleScope.launch {
+        // list should be scrolled to the 1st item (index = 0) if data has been reloaded:
+        // (prev state = Loading, current state = NotLoading)
+        getRefreshLoadStateFlow(adapter)
+            .simpleScan(2)
+            .collectLatest { (previousState, currentState) ->
+                if (previousState is LoadState.Loading && currentState is LoadState.NotLoading) {
+                    binding?.recyclerViewProducts?.scrollToPosition(0)
+                }
+            }
+    }
+
+    private fun getRefreshLoadStateFlow(adapter: ProductsPagingAdapter): Flow<LoadState> {
+        return adapter.loadStateFlow
+            .map { it.refresh }
+    }
+
 }

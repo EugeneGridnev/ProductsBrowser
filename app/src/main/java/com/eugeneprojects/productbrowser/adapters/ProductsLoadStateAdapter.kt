@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eugeneprojects.productbrowser.databinding.ItemErrorBinding
 import com.eugeneprojects.productbrowser.databinding.ItemProgressBinding
 
-class ProductsLoadStateAdapter() : LoadStateAdapter<ProductsLoadStateAdapter.Holder>() {
+class ProductsLoadStateAdapter : LoadStateAdapter<ProductsLoadStateAdapter.Holder>() {
 
     override fun getStateViewType(loadState: LoadState) = when (loadState) {
 
