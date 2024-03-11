@@ -10,9 +10,9 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/ivProductImage"
+            android:id="@+id/imageViewProductImage"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="@dimen/product_image_view_height"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
             app:layout_constraintBottom_toTopOf="@+id/textViewProductDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivProductImage"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewProductImage"
             tools:text="IPhone 9" />
 
         <TextView

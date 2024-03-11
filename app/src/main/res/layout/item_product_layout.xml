@@ -5,20 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:elevation="8dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="8dp">
+    android:layout_margin="@dimen/card_margin"
+    android:elevation="@dimen/card_elevation"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="@dimen/card_padding">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/itemViewProductThumbnail"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/card_image_width"
+            android:layout_height="@dimen/card_image_height"
             android:scaleType="fitXY"
             app:shapeAppearanceOverlay="@style/roundedImageView"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,13 +26,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            style="@style/cardTextViewStyle"
             android:id="@+id/textViewProductTitle"
             android:ellipsize="end"
             android:maxLines="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:textAppearance="?attr/textAppearanceTitleLarge"
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintBottom_toTopOf="@+id/textViewProductDescription"
@@ -42,11 +41,10 @@
             tools:text="iPhone 9" />
 
         <TextView
+            style="@style/cardTextViewStyle"
             android:id="@+id/textViewProductDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:maxLines="3"
             android:ellipsize="end"
             android:textAppearance="?attr/textAppearanceBodyMedium"

@@ -9,23 +9,28 @@
 
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">5dp</item>
+        <item name="cornerSize">@dimen/card_corner_size</item>
     </style>
 
     <style name="productFragmentMainText">
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_marginStart">32dp</item>
-        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:layout_marginTop">@dimen/product_fragment_main_text_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/product_fragment_main_text_margin_bottom</item>
+        <item name="android:layout_marginStart">@dimen/product_fragment_main_text_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/product_fragment_main_text_margin_bottom</item>
     </style>
 
     <style name="productFragmentText" parent="productFragmentMainText">
-        <item name="android:layout_marginStart">0dp</item>
-        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:layout_marginStart">@dimen/product_fragment_text_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/product_fragment_text_margin_end</item>
     </style>
 
     <style name="productFragmentTitles" parent="productFragmentText">
-        <item name="android:layout_marginStart">32dp</item>
-        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginStart">@dimen/product_fragment_titles_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/product_fragment_titles_margin_end</item>
+    </style>
+
+    <style name="cardTextViewStyle">
+        <item name="android:layout_marginStart">@dimen/card_text_view_style_margin</item>
+        <item name="android:layout_marginEnd">@dimen/card_text_view_style_margin</item>
     </style>
 </resources>
