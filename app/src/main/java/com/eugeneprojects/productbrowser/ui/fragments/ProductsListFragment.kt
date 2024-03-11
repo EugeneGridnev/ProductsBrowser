@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 class ProductsListFragment : Fragment() {
 
     private var binding: FragmentProductsListBinding? = null
+
     private lateinit var viewModel: ProductsViewModel
     private lateinit var productsPagingAdapter: ProductsPagingAdapter
 

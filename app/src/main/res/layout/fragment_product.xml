@@ -9,11 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageViewProductImage"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerProductImages"
             android:layout_width="match_parent"
             android:layout_height="@dimen/product_image_view_height"
-            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +28,7 @@
             app:layout_constraintBottom_toTopOf="@+id/textViewProductDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewProductImage"
+            app:layout_constraintTop_toBottomOf="@+id/viewPagerProductImages"
             tools:text="IPhone 9" />
 
         <TextView
