@@ -22,7 +22,6 @@ import com.eugeneprojects.productbrowser.network.ConnectivityRepository
 import com.eugeneprojects.productbrowser.repository.ProductsRepositoryIMPL
 import com.eugeneprojects.productbrowser.ui.ProductsViewModel
 import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
-import com.eugeneprojects.productbrowser.util.Constants
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -53,7 +52,7 @@ class ProductsListFragment : Fragment() {
             if (isOnline) {
                 setUpProductsList()
             } else {
-                Toast.makeText(activity, Constants.NETWORK_ERROR, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, resources.getString(R.string.network_error_message), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -75,7 +74,7 @@ class ProductsListFragment : Fragment() {
             binding?.recyclerViewProducts?.isVisible = refreshState != LoadState.Loading
             binding?.progressBar?.isVisible = refreshState == LoadState.Loading
             if (refreshState is LoadState.Error) {
-                Toast.makeText(activity, Constants.TOAST_ERROR, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,resources.getString(R.string.toast_load_error_message), Toast.LENGTH_SHORT).show()
             }
         }
 

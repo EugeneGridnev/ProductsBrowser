@@ -8,7 +8,7 @@ import com.eugeneprojects.productbrowser.util.Constants
 import retrofit2.HttpException
 
 class ProductPagingSource (
-    val productsRepository: ProductsRepository
+    val productsRepository: ProductsRepository,
 ) : PagingSource<Int, Product>() {
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
@@ -21,7 +21,7 @@ class ProductPagingSource (
         val pageNumber = params.key ?: INITIAL_PAGE_NUMBER
         val pageSize: Int = params.loadSize.coerceAtMost(Constants.PAGE_SIZE)
         val skip = pageNumber * pageSize
-        val response = productsRepository.getProducts(pageSize, skip)
+        val response = productsRepository.getProducts("", pageSize, skip)
 
         if (response.isSuccessful) {
             val products = checkNotNull(response.body()).products.map { product->

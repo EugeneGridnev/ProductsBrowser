@@ -22,7 +22,7 @@ class ProductsViewModel(
 
     val products: Flow<PagingData<Product>> = Pager(
         config = PagingConfig(
-            Constants.PAGE_SIZE,
+            pageSize = Constants.PAGE_SIZE,
             enablePlaceholders = false,
             initialLoadSize = Constants.PAGE_SIZE
         ),

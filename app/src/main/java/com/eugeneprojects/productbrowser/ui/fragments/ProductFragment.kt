@@ -12,7 +12,6 @@ import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.databinding.FragmentProductBinding
 import com.eugeneprojects.productbrowser.network.ConnectivityRepository
 import com.eugeneprojects.productbrowser.repository.ProductsRepositoryIMPL
-import com.eugeneprojects.productbrowser.ui.ProductsActivity
 import com.eugeneprojects.productbrowser.ui.ProductsViewModel
 import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
 
@@ -47,7 +46,7 @@ class ProductFragment : Fragment() {
         Glide.with(this)
             .load(product.thumbnail)
             .placeholder(R.drawable.ic_image_placeholder)
-            .into(binding.ivProductImage)
+            .into(binding.imageViewProductImage)
         binding.textViewProductTitle.text = product.title
         binding.textViewProductDescription.text = product.description
         binding.textViewProductBrand.text = product.brand
