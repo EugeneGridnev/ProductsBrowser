@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -38,6 +40,9 @@ android {
     viewBinding{
         enable = true
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -66,4 +71,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
 
     implementation ("androidx.paging:paging-runtime-ktx:3.2.1")
+
+    implementation ("com.google.dagger:hilt-android:2.51")
+    kapt("com.google.dagger:hilt-android-compiler:2.51")
 }
