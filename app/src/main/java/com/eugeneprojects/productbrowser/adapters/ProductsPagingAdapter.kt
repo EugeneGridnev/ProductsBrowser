@@ -17,6 +17,7 @@ class ProductsPagingAdapter :
     private var onItemClickListener: ((Product) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+
         return ProductViewHolder(
             ItemProductLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -27,6 +28,7 @@ class ProductsPagingAdapter :
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+
         val product = getItem(position) ?: return
         holder.bind(product, onItemClickListener)
     }

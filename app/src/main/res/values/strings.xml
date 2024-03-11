@@ -11,5 +11,6 @@
     <string name="product_rating">Рейтинг:</string>
     <string name="product_stock">Штук в наличии:</string>
     <string name="product_discount_percentage">Скидка:</string>
-
+    <string name="product_percentage_symbol">%</string>
+    <string name="product_dollar_price_symbol">$</string>
 </resources>

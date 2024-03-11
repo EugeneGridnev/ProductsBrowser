@@ -12,6 +12,7 @@ import com.eugeneprojects.productbrowser.databinding.ItemProgressBinding
 class ProductsLoadStateAdapter() : LoadStateAdapter<ProductsLoadStateAdapter.Holder>() {
 
     override fun getStateViewType(loadState: LoadState) = when (loadState) {
+
         is LoadState.NotLoading -> error("Not supported")
         LoadState.Loading -> PROGRESS
         is LoadState.Error -> ERROR

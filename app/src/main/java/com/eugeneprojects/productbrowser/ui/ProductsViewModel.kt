@@ -39,6 +39,7 @@ class ProductsViewModel(
         .cachedIn(viewModelScope)
 
     fun setSearchQuery(query: String) {
+
         if (searchQuery.value != query) {
             searchQuery.value = query
         }
