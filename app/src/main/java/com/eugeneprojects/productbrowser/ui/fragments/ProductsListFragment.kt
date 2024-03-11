@@ -1,6 +1,8 @@
 package com.eugeneprojects.productbrowser.ui.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +20,7 @@ import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.adapters.ProductsLoadStateAdapter
 import com.eugeneprojects.productbrowser.adapters.ProductsPagingAdapter
 import com.eugeneprojects.productbrowser.databinding.FragmentProductsListBinding
-import com.eugeneprojects.productbrowser.network.ConnectivityRepository
+import com.eugeneprojects.productbrowser.network.ConnectivityRepositoryIMPL
 import com.eugeneprojects.productbrowser.repository.ProductsRepositoryIMPL
 import com.eugeneprojects.productbrowser.ui.ProductsViewModel
 import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
@@ -29,6 +31,7 @@ class ProductsListFragment : Fragment() {
 
     private var binding: FragmentProductsListBinding? = null
     private lateinit var viewModel: ProductsViewModel
+    private lateinit var productsPagingAdapter: ProductsPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,15 +45,19 @@ class ProductsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val productsRepository = ProductsRepositoryIMPL()
-        val connectivityRepository =ConnectivityRepository(requireContext())
+        val connectivityRepository = ConnectivityRepositoryIMPL(requireContext())
         val viewModelProviderFactory = ProductsViewModelProviderFactory(productsRepository, connectivityRepository)
 
         viewModel =
             ViewModelProvider(this, viewModelProviderFactory)[ProductsViewModel::class.java]
 
+        setUpProductsList()
+        observeProducts()
+        setTextChangeListener()
+
         viewModel.isOnline.observe(viewLifecycleOwner) { isOnline ->
             if (isOnline) {
-                setUpProductsList()
+                productsPagingAdapter.retry()
             } else {
                 Toast.makeText(activity, resources.getString(R.string.network_error_message), Toast.LENGTH_SHORT).show()
             }
@@ -64,10 +71,22 @@ class ProductsListFragment : Fragment() {
 
     private fun setUpProductsList() {
 
-        val productsPagingAdapter = ProductsPagingAdapter()
+        productsPagingAdapter = ProductsPagingAdapter()
 
         binding?.recyclerViewProducts?.layoutManager = LinearLayoutManager(activity)
         binding?.recyclerViewProducts?.adapter = productsPagingAdapter.withLoadStateFooter(ProductsLoadStateAdapter())
+
+        setOnProductClick()
+
+        initSwipeToRefresh(productsPagingAdapter)
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                productsPagingAdapter.loadStateFlow.collect { loadStates ->
+                    binding?.swipeRefresh?.isRefreshing = loadStates.mediator?.refresh is LoadState.Loading
+                }
+            }
+        }
 
         productsPagingAdapter.addLoadStateListener { combinedLoadStates ->
             val refreshState = combinedLoadStates.refresh
@@ -78,23 +97,20 @@ class ProductsListFragment : Fragment() {
             }
         }
 
-        observeProducts(productsPagingAdapter)
-
-        setOnProductClick(productsPagingAdapter)
     }
 
-    private fun observeProducts(adapter: ProductsPagingAdapter) {
+    private fun observeProducts() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.products.collectLatest(adapter::submitData)
+                viewModel.products.collectLatest(productsPagingAdapter::submitData)
             }
         }
     }
 
-    private fun setOnProductClick(adapter: ProductsPagingAdapter) {
+    private fun setOnProductClick() {
 
-        adapter.setOnItemClickListener {
+        productsPagingAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putParcelable("product", it)
             }
@@ -103,5 +119,21 @@ class ProductsListFragment : Fragment() {
                 bundle
             )
         }
+    }
+
+    private fun initSwipeToRefresh(adapter: ProductsPagingAdapter) {
+        binding?.swipeRefresh?.setOnRefreshListener { adapter.refresh() }
+    }
+
+    private fun setTextChangeListener() {
+        binding?.searchEditText?.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.setSearchQuery(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) { }
+        })
     }
 }

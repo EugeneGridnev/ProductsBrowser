@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 interface ProductsAPI {
 
-    @GET("/products/")
+    @GET("/products/search")
     suspend fun getProducts(
-        @Query("search")
+        @Query("q")
         searchText: String = "",
         @Query("limit")
         productsLimit: Int,

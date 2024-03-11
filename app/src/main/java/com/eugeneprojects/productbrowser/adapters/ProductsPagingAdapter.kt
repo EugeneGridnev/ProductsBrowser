@@ -28,17 +28,14 @@ class ProductsPagingAdapter :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position) ?: return
-        holder.bind(product)
-        setOnItemClickListener {
-            onItemClickListener?.let { it(product) }
-        }
+        holder.bind(product, onItemClickListener)
     }
 
 
     class ProductViewHolder(val binding: ItemProductLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(product: Product) {
+            fun bind(product: Product, onClickListener: ((Product) -> Unit)? = null) {
                 this.itemView.apply {
                     Glide.with(this)
                         .load(product.thumbnail)
@@ -46,6 +43,9 @@ class ProductsPagingAdapter :
                         .into(binding.itemViewProductThumbnail)
                     binding.textViewProductTitle.text = product.title
                     binding.textViewProductDescription.text = product.description
+                    setOnClickListener {
+                        onClickListener?.invoke(product)
+                    }
                 }
             }
         }
