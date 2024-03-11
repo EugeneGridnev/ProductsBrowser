@@ -11,8 +11,10 @@ import com.eugeneprojects.productbrowser.network.ConnectivityRepository
 import com.eugeneprojects.productbrowser.repository.ProductsRepository
 import com.eugeneprojects.productbrowser.repository.paging.ProductPagingSource
 import com.eugeneprojects.productbrowser.util.Constants
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
 
 class ProductsViewModel(
     private val productsRepository: ProductsRepository,
@@ -33,7 +35,8 @@ class ProductsViewModel(
             config = Constants.PAGING_CONFIG,
             pagingSourceFactory = { ProductPagingSource(productsRepository, it) }
         ).flow
-    }.cachedIn(viewModelScope)
+    }.flowOn(Dispatchers.IO)
+        .cachedIn(viewModelScope)
 
     fun setSearchQuery(query: String) {
         if (searchQuery.value != query) {
