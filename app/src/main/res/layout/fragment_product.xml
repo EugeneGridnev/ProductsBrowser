@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerProductImages"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/product_image_view_height"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textViewProductTitle"/>
+
+        <TextView
+            style="@style/productFragmentMainText"
+            android:id="@+id/textViewProductTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPagerProductImages"
+            tools:text="IPhone 9" />
+
+        <TextView
+            style="@style/productFragmentMainText"
+            android:id="@+id/textViewProductDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductBrandTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductTitle"
+            tools:text="Attractive DesignMetallic materialFour key hooksReliable and DurablePremium Quality" />
+
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductBrandTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_brand"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductPriceTitle"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductBrand"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductDescription" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductBrand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductBrandTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductBrandTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductBrandTitle"
+            tools:text="Топ за свои деньги" />
+
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductPriceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/product_price"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductDiscountPercentageTitle"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductBrand" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductPriceTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductPriceTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductPriceTitle"
+            tools:text="300$" />
+
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductDiscountPercentageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/product_discount_percentage"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductCategoryTitle"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductDiscountPercentage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductPrice" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductDiscountPercentage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductDiscountPercentageTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductDiscountPercentageTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductDiscountPercentageTitle"
+            tools:text="20%" />
+
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductCategoryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/product_category"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductRatingTitle"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductCategory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductDiscountPercentage" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductCategoryTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductCategoryTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductCategoryTitle"
+            tools:text="Техника" />
+
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductRatingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/product_rating"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/textViewProductStockTitle"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductRating"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductCategory" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductRating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductRatingTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductRatingTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductRatingTitle"
+            tools:text="10" />
+
+        <TextView
+            style="@style/productFragmentTitles"
+            android:id="@+id/textViewProductStockTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/product_stock"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textViewProductStock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProductRating" />
+
+        <TextView
+            style="@style/productFragmentText"
+            android:id="@+id/textViewProductStock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewProductStockTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewProductStockTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewProductStockTitle"
+            tools:text="100" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
