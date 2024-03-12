@@ -3,12 +3,12 @@ package com.eugeneprojects.productbrowser.ui.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,16 +20,15 @@ import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.adapters.ProductsLoadStateAdapter
 import com.eugeneprojects.productbrowser.adapters.ProductsPagingAdapter
 import com.eugeneprojects.productbrowser.databinding.FragmentProductsListBinding
-import com.eugeneprojects.productbrowser.network.ConnectivityRepositoryIMPL
-import com.eugeneprojects.productbrowser.repository.ProductsRepositoryIMPL
 import com.eugeneprojects.productbrowser.ui.ProductsViewModel
-import com.eugeneprojects.productbrowser.ui.ProductsViewModelProviderFactory
 import com.eugeneprojects.productbrowser.util.simpleScan
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ProductsListFragment : Fragment() {
 
     private var binding: FragmentProductsListBinding? = null
@@ -48,12 +47,7 @@ class ProductsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val productsRepository = ProductsRepositoryIMPL()
-        val connectivityRepository = ConnectivityRepositoryIMPL(requireContext())
-        val viewModelProviderFactory = ProductsViewModelProviderFactory(productsRepository, connectivityRepository)
-
-        viewModel =
-            ViewModelProvider(this, viewModelProviderFactory)[ProductsViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ProductsViewModel::class.java]
 
         setUpProductsList()
         observeProducts()

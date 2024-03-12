@@ -11,12 +11,15 @@ import com.eugeneprojects.productbrowser.network.ConnectivityRepository
 import com.eugeneprojects.productbrowser.repository.ProductsRepository
 import com.eugeneprojects.productbrowser.repository.paging.ProductPagingSource
 import com.eugeneprojects.productbrowser.util.Constants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class ProductsViewModel(
+@HiltViewModel
+class ProductsViewModel @Inject constructor(
     private val productsRepository: ProductsRepository,
     private val connectivityRepository: ConnectivityRepository
 ) :
@@ -25,7 +28,6 @@ class ProductsViewModel(
     private var searchQuery: MutableLiveData<String> = MutableLiveData("")
 
     val isOnline = connectivityRepository.isConnected.asLiveData()
-
 
     val products = searchQuery
         .asFlow()

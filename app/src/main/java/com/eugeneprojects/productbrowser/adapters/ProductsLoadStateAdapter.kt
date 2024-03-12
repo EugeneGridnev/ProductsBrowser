@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.databinding.ItemErrorBinding
 import com.eugeneprojects.productbrowser.databinding.ItemProgressBinding
-import com.eugeneprojects.productbrowser.util.Constants
 
 class ProductsLoadStateAdapter : LoadStateAdapter<ProductsLoadStateAdapter.Holder>() {
 

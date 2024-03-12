@@ -1,9 +1,10 @@
 package com.eugeneprojects.productbrowser.repository
 
-import com.eugeneprojects.productbrowser.api.RetrofitInstance
+import com.eugeneprojects.productbrowser.api.ProductsAPI
+import javax.inject.Inject
 
-class ProductsRepositoryIMPL: ProductsRepository {
+class ProductsRepositoryIMPL @Inject constructor(private val api: ProductsAPI): ProductsRepository {
 
     override suspend fun getProducts(searchText: String, productsLimit: Int, skip: Int) =
-        RetrofitInstance.api.getProducts(searchText, productsLimit, skip)
+        api.getProducts(searchText, productsLimit, skip)
 }
