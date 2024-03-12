@@ -7,11 +7,19 @@
 Обработаны ошибки, которые могут возникнуть при работе с приложением в удобной для пользователя форме
 
 **Используются:**
-*Kotlin
+_*Kotlin
+
 *android views
+
 *coroutines
+
 *flow
+
 *MVVM
+
 *Glide
+
 *Retrofit
-*Hilt
+
+*Hilt_
+
