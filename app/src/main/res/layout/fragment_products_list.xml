@@ -29,16 +29,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        style="@style/productFragmentMainText"
         android:id="@+id/textViewStub"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Жесть, ничего не нашли"
-        android:textSize="30sp"
+        android:text="@string/empty_search_message"
+        android:textSize="@dimen/search_error_message_text_size"
         android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:textColor="@color/material_dynamic_tertiary40"
+        app:layout_constraintTop_toBottomOf="@+id/searchTextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="@string/empty_search_message"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"

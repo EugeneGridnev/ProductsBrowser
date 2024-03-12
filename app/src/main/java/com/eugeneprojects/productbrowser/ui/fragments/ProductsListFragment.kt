@@ -91,8 +91,17 @@ class ProductsListFragment : Fragment() {
             val refreshState = combinedLoadStates.refresh
             binding?.recyclerViewProducts?.isVisible = refreshState != LoadState.Loading
             binding?.progressBar?.isVisible = refreshState == LoadState.Loading
+
             if (refreshState is LoadState.Error) {
                 Toast.makeText(activity,resources.getString(R.string.toast_load_error_message), Toast.LENGTH_SHORT).show()
+            }
+
+            if (combinedLoadStates.source.refresh is LoadState.NotLoading && combinedLoadStates.append.endOfPaginationReached && productsPagingAdapter.itemCount == 0) {
+                binding?.recyclerViewProducts?.isVisible = false
+                binding?.textViewStub?.isVisible = true
+            } else {
+                binding?.recyclerViewProducts?.isVisible = true
+                binding?.textViewStub?.isVisible = false
             }
         }
 

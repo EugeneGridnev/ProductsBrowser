@@ -30,4 +30,6 @@
     <dimen name="product_fragment_main_text_margin_bottom">5dp</dimen>
     <dimen name="product_fragment_main_text_margin_start">32dp</dimen>
     <dimen name="product_fragment_main_text_margin_end">32dp</dimen>
+
+    <dimen name="search_error_message_text_size">30sp</dimen>
 </resources>
