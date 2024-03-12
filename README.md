@@ -29,3 +29,5 @@
 *_Hilt_
 
 *_Jetpack Navigation_
+
+*_Paging3_
