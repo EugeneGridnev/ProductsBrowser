@@ -37,20 +37,19 @@ class ProductsPagingAdapter :
     class ProductViewHolder(val binding: ItemProductLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-            fun bind(product: Product, onClickListener: ((Product) -> Unit)? = null) {
-                this.itemView.apply {
-                    Glide.with(this)
-                        .load(product.thumbnail)
-                        .placeholder(R.drawable.ic_image_placeholder)
-                        .into(binding.itemViewProductThumbnail)
-                    binding.textViewProductTitle.text = product.title
-                    binding.textViewProductDescription.text = product.description
-                    setOnClickListener {
-                        onClickListener?.invoke(product)
-                    }
-                }
+        fun bind(product: Product, onClickListener: ((Product) -> Unit)? = null) {
+
+            Glide.with(itemView)
+                .load(product.thumbnail)
+                .placeholder(R.drawable.ic_image_placeholder)
+                .into(binding.itemViewProductThumbnail)
+            binding.textViewProductTitle.text = product.title
+            binding.textViewProductDescription.text = product.description
+            itemView.setOnClickListener {
+                onClickListener?.invoke(product)
             }
         }
+    }
 
     class ProductDiffCallBack : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {

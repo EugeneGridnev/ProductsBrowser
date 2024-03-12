@@ -13,4 +13,5 @@
     <string name="product_discount_percentage">Скидка:</string>
     <string name="product_percentage_symbol">%</string>
     <string name="product_dollar_price_symbol">$</string>
+    <string name="list_load_error">При загрузке списка возникла ошибка, проверьте сеть и попробуйте обновить список</string>
 </resources>

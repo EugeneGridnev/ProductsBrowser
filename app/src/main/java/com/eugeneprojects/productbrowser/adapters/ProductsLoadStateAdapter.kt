@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.eugeneprojects.productbrowser.R
 import com.eugeneprojects.productbrowser.databinding.ItemErrorBinding
 import com.eugeneprojects.productbrowser.databinding.ItemProgressBinding
 import com.eugeneprojects.productbrowser.util.Constants
@@ -38,6 +39,8 @@ class ProductsLoadStateAdapter : LoadStateAdapter<ProductsLoadStateAdapter.Holde
     }
 
     abstract class Holder(view: View) : RecyclerView.ViewHolder(view) {
+
+        protected val context = view.context
 
         abstract fun bind(loadState: LoadState)
     }
@@ -72,7 +75,7 @@ class ProductsLoadStateAdapter : LoadStateAdapter<ProductsLoadStateAdapter.Holde
 
         override fun bind(loadState: LoadState) {
             require(loadState is LoadState.Error)
-            binding.errorMessage.text = Constants.LIST_LOAD_ERROR
+            binding.errorMessage.text = context.getText(R.string.list_load_error)
         }
 
         companion object {
