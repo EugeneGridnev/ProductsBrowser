@@ -8,17 +8,10 @@
 
 **Используются:**
 *Kotlin
-
 *android views
-
 *coroutines
-
 *flow
-
 *MVVM
-
 *Glide
-
 *Retrofit
-
 *Hilt
